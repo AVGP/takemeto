@@ -1,0 +1,15 @@
+<ion-view title="Quick Trip">
+  <ion-content class="padding">
+    <h1>Quick trip</h1>
+    <div class="list">
+    <label class="item item-input item-select">
+      <div class="item-label">Starting from</div>
+      <select id="from" ng-model="from" ng-options="station.name for station in nearby" ng-change="getDestinations()"></select>
+    </label>
+    <label class="item item-input item-select">
+      <div class="item-label">Going to</div>
+      <select id="from" ng-model="to" ng-options="route.to for route in destinations"></select>
+    </label>
+  </div>
+  </ion-content>
+</ion-view>

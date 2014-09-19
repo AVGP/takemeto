@@ -1,0 +1,17 @@
+{
+  "name": "TakeMeTo",
+  "description": "Swiss public transport app",
+  "launch_path": "/index.html",
+  "icons": {
+    "60": "img/icon.png"
+  },
+  "developer": {
+    "name": "Your name or organization",
+    "url": "http://your-homepage-here.org"
+  },
+  "default_locale": "en",
+  "permissions": {
+    "geolocation": { "description": "Show nearby stations and quick navigation from where you are"},
+    "systemXHR": { "description": "Retrieving connections and station list" }
+  }
+}

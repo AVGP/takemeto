@@ -1,0 +1,14 @@
+<ion-view title="Stations">
+  <ion-content class="padding">
+    <h1>Stations</h1>
+    <h2>Nearby</h2>
+    <ul class="list">
+      <li class="item" ng-repeat="station in nearby">{{station.name}} <span class="badge badge-stable">{{station.distance}}m</span></li>
+    </ul>
+
+    <h2>Favourites</h2>
+    <ul class="list">
+      <li class="item" ng-repeat="fav in favourites">{{fav.name}}</li>
+    </ul>
+  </ion-content>
+</ion-view>
