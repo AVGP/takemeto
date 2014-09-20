@@ -1,21 +1,22 @@
 <ion-view title="Quick Trip">
-  <ion-content class="padding">
+  <ion-content>
     <div class="list">
-    <label class="item item-input item-select">
-      <div class="item-label">Starting from</div>
-      <select id="from" ng-model="from" ng-options="station.name for station in nearby" ng-change="getDestinations()"></select>
-    </label>
-    <label class="item item-input item-select">
-      <div class="item-label">Going to</div>
-      <select id="to" ng-model="route" ng-options="route.to for route in destinations"></select>
-    </label>
+      <div class="item item-input item-select">
+        <label class="input-label">Starting from</label>
+        <select ng-model="from" ng-options="station.name for station in nearby" ng-change="getDestinations()"></select>
+      </div>
+      <div class="item item-input item-select">
+        <label class="input-label">Going to</label>
+        <select ng-model="route" ng-options="route.to for route in destinations"></select>
+      </div>
+    </div>      
     <button class="button button-positive button-block" ng-click="getConnections()">Take me there</button>
-  </div>
-  <ul class="list">
-    <li class="item" ng-repeat="conn in connections">
-      {{conn.from}} &mdash; {{conn.to}}
-      <i class="item-note">{{conn.departure}} &mdash; {{conn.arrival}} ({{conn.duration}})</i>
-    </li>
-  </ul>
+
+    <ul class="list">
+      <li class="item" ng-repeat="conn in connections">
+        {{conn.from}} &mdash; {{conn.to}}
+        <i class="item-note">{{conn.departure}} &mdash; {{conn.arrival}} ({{conn.duration}})</i>
+      </li>
+    </ul>
   </ion-content>
 </ion-view>
