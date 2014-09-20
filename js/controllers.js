@@ -7,7 +7,6 @@ angular.module('tmt.controllers', [])
 
     $scope.from  = null;
     $scope.route = {};
-    $scope.to    = "Zürich Hardbrücke";
 
     navigator.geolocation.getCurrentPosition(function(position) {
         console.log("Acquired position: ", position);
