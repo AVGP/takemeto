@@ -9,6 +9,46 @@ angular.module('tmt.services', [])
     all: function() { return favourites; }
   };
 })
+.factory('Connections', function($http) {
+  var formatDuration = function(duration) {
+    var formatted = "";
+    var days  = parseInt(duration.slice(0,2), 10),
+        hours = parseInt(duration.slice(3,5), 10),
+        mins  = parseInt(duration.slice(6,8), 10);
+
+    if(days > 0) {
+      formatted = days + " Tag" + (days > 1 ? "e " : " ");
+    }
+
+    if(hours > 0) {
+      formatted += hours + "h ";
+    }
+    formatted += mins + "m";
+
+    return formatted;
+  };
+
+  return {
+    format: function(rawConnections) {
+      var connections = rawConnections.connections;
+      for(var i=0, len = connections.length; i<len; i++) {
+        var departureAt = new Date(connections[i].from.departure),
+            arrivalAt   = new Date(connections[i].to.arrival),
+            duration    = formatDuration(connections[i].duration);
+
+        connections[i] = {
+          from: connections[i].from.station.name,
+          to:   connections[i].to.station.name,
+          departure: departureAt.toLocaleTimeString().slice(0, -3),
+          arrival: arrivalAt.toLocaleTimeString().slice(0, -3),
+          duration: duration
+        };
+      }
+
+      return connections;
+    }
+  };
+})
 .factory('Stations', function() {
   var favourites = [
    { name: "Zürich Hauptbahnhof", lat: 8.540192, lng: 47.378177 },
@@ -44,16 +84,4 @@ angular.module('tmt.services', [])
       return favourites.filter(function(fav) { return fav.from == station });
     }
   };
-})
-.factory('QuickTrip', function(FavouriteRoutes) {
-
-  return {
-    all: function() {
-      return friends;
-    },
-    get: function(friendId) {
-      // Simple index lookup
-      return friends[friendId];
-    }
-  }
 });
