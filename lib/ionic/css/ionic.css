@@ -5620,7 +5620,7 @@ input[type="range"] {
     padding: 14px 48px 16px 16px;
     max-width: 65%;
     border: none;
-    /*background: #fff;*/
+    background: #fff;
     color: #333;
     text-indent: 0.01px;
     text-overflow: '';
