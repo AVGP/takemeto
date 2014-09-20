@@ -34,7 +34,8 @@ angular.module('tmt.services', [])
     {from: "Zürich HB", to: "Altstetten"},
     {from: "Zürich HB", to: "Altstetten"},
     {from: "Zürich, Räffelstrasse", to: "Zürich, Sackzelg"},
-    {from: "Zürich, Räffelstrasse", to: "Zürich HB"}
+    {from: "Zürich, Räffelstrasse", to: "Zürich HB"},
+    {from: "Zürich, Siemens", to: "Zürich HB" }
   ];
 
   return {
