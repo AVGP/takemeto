@@ -1,6 +1,5 @@
 <ion-view title="Quick Trip">
   <ion-content class="padding">
-    <h1>Quick trip</h1>
     <div class="list">
     <label class="item item-input item-select">
       <div class="item-label">Starting from</div>
@@ -8,8 +7,15 @@
     </label>
     <label class="item item-input item-select">
       <div class="item-label">Going to</div>
-      <select id="from" ng-model="to" ng-options="route.to for route in destinations"></select>
+      <select id="to" ng-model="route" ng-options="route.to for route in destinations"></select>
     </label>
+    <button class="button button-positive button-block" ng-click="getConnections()">Take me there</button>
   </div>
+  <ul class="list">
+    <li class="item" ng-repeat="conn in connections">
+      {{conn.from}} &mdash; {{conn.to}}
+      <i class="item-note">{{conn.departure}} &mdash; {{conn.arrival}} ({{conn.duration}})</i>
+    </li>
+  </ul>
   </ion-content>
 </ion-view>
