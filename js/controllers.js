@@ -6,7 +6,8 @@ angular.module('tmt.controllers', [])
     $scope.connections  = [];
 
     $scope.from  = null;
-    $scope.route = null;
+    $scope.route = {};
+    $scope.to    = "Zürich Hardbrücke";
 
     navigator.geolocation.getCurrentPosition(function(position) {
         console.log("Acquired position: ", position);
@@ -21,13 +22,14 @@ angular.module('tmt.controllers', [])
     });
 
     $scope.getDestinations = function() {
+      $scope.from = this.from;
       console.log("Getting destinations for ", $scope.from);
       $scope.destinations = FavouriteRoutes.getByStartStation($scope.from.name);
-      $scope.route = $scope.destinations[0];
+      $scope.route = $scope.destinations[0] || {};
+      console.log("Destinations", $scope.destinations);
     }
 
     $scope.getConnections = function() {
-      console.log("Going to...", $scope.route);
       $http({method: "GET", url: "http://transport.opendata.ch/v1/connections?limit=5&from=" + $scope.from.name + "&to=" + $scope.route.to})
         .success(function(result) {
           $scope.connections = Connections.format(result);

@@ -5,9 +5,11 @@
         <label class="input-label">Starting from</label>
         <select ng-model="from" ng-options="station.name for station in nearby" ng-change="getDestinations()"></select>
       </div>
-      <div class="item item-input item-select">
+      <div class="item item-input" ng-class="destinations.length > 0 ? 'item-select' : ''">
         <label class="input-label">Going to</label>
-        <select ng-model="route" ng-options="route.to for route in destinations"></select>
+        <i class="icon ion-search placeholder-icon" ng-show="destinations.length == 0"></i>
+        <input type="text" class="input-inset" ng-show="destinations.length == 0" ng-model="route.to">
+        <select ng-model="route" ng-show="destinations.length > 0" ng-options="route.to for route in destinations"></select>
       </div>
     </div>      
     <button class="button button-positive button-block" ng-click="getConnections()">Take me there</button>
