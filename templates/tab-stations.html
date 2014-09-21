@@ -8,27 +8,27 @@
   </ion-header-bar>
 
   <ion-content class="padding" scroll="true">
-    <div class="list" ng-show="stations.results.length > 0">
-      <a class="item item-icon-left" ng-repeat="station in stations.results" href="#/tab/stations/{{station.id}}">
-        <i class="icon ion-star" ng-class="station.isFavourite ? 'favourite' : 'inactive'" ng-click="station.results = toggleFavourite(stations.results, $index)"></i>
+    <ul class="list" ng-show="stations.results.length > 0">
+      <li class="item item-icon-left" ng-repeat="station in stations.results" ng-click="show(station.id)">
+        <i class="icon ion-star" ng-class="station.isFavourite ? 'favourite' : 'inactive'" ng-click="station.results = toggleFavourite(stations.results, $index);$event.stopPropagation()"></i>
         {{station.name}}
-      </a>
-    </div>
+      </li>
+    </ul>
 
     <h2>Nearby</h2>
-    <div class="list">
-      <a class="item" ng-repeat="station in nearby" href="#/tab/stations/{{station.id}}">
-        <i class="icon ion-star" ng-class="station.isFavourite ? 'favourite' : 'inactive'" ng-click="nearby = toggleFavourite(nearby, $index)"></i>
-        {{station.name}} <span class="badge badge-stable">{{station.distance}}m</span>
-      </a>
-    </div>
+    <ul class="list">
+      <li class="item item-icon-left" ng-repeat="station in nearby" ng-click="show(station.id)">
+        <i class="icon ion-star" ng-class="station.isFavourite ? 'favourite' : 'inactive'" ng-click="nearby = toggleFavourite(nearby, $index);$event.stopPropagation()"></i>
+        {{station.name}} <span class="item-note">{{station.distance}}m</span>
+      </li>
+    </ul>
 
     <h2>Favourites</h2>
-    <div class="list">
-      <a class="item item-icon-right" ng-repeat="fav in favourites" href="#/tab/stations/{{fav.id}}">
+    <ul class="list">
+      <li class="item item-icon-right" ng-repeat="fav in favourites" ng-click="show(fav.id)">
         {{fav.name}}
         <i ng-click="removeFavourite(fav)" class="icon ion-close-circled"></i>
-      </a>
-    </div>
+      </li>
+    </ul>
   </ion-content>
 </ion-view>

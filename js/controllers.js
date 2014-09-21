@@ -84,7 +84,7 @@ angular.module('tmt.controllers', [])
 .controller('ScheduleCtrl', function($scope) {
 })
 
-.controller('StationsCtrl', function($scope, $http, Stations, FavouriteStations) {
+.controller('StationsCtrl', function($scope, $http, $location, Stations, FavouriteStations) {
     navigator.geolocation.getCurrentPosition(function(position) {
         console.log("Acquired position: ", position);
         Stations.nearby(position.coords, function(error, stations) {
@@ -142,6 +142,10 @@ angular.module('tmt.controllers', [])
 
     $scope.removeFavourite = function(station) {
       $scope.favourites = FavouriteStations.remove(station);
+    }
+    
+    $scope.show = function(stationId) {
+      $location.path("/tab/stations/" + stationId);
     }
 })
 
