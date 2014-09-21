@@ -10,7 +10,7 @@
   <ion-content class="padding" scroll="true">
     <ul class="list" ng-show="stations.results.length > 0">
       <li class="item item-icon-left" ng-repeat="station in stations.results">
-        <i class="icon ion-star" ng-class="station.isFavourite ? 'favourite' : 'inactive'" ng-click="toggleFavourite($index)"></i>
+        <i class="icon ion-star" ng-class="station.isFavourite ? 'favourite' : 'inactive'" ng-click="station.results = toggleFavourite(stations.results, $index)"></i>
         {{station.name}}
       </li>
     </ul>
@@ -18,7 +18,7 @@
     <h2>Nearby</h2>
     <ul class="list">
       <li class="item" ng-repeat="station in nearby">
-        <i class="icon ion-star" ng-class="station.isFavourite ? 'favourite' : 'inactive'" ng-click="toggleFavourite(station)"></i>
+        <i class="icon ion-star" ng-class="station.isFavourite ? 'favourite' : 'inactive'" ng-click="nearby = toggleFavourite(nearby, $index)"></i>
         {{station.name}} <span class="badge badge-stable">{{station.distance}}m</span>
       </li>
     </ul>

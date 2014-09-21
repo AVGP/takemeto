@@ -59,6 +59,17 @@ angular.module('tmt.controllers', [])
     navigator.geolocation.getCurrentPosition(function(position) {
         console.log("Acquired position: ", position);
         Stations.nearby(position.coords, function(error, stations) {
+          var favs = $scope.favourites;
+          for(var i=0, len = stations.length; i<len; i++) {
+            stations[i].isFavourite = false;
+            for(var f=0, flen = favs.length; f<flen;f++) {
+              if(stations[i].name == favs[f].name) {
+                stations[i].isFavourite = true;
+                break;
+              }
+            }
+          }
+
           $scope.$apply(function() {
             $scope.nearby = stations;
           });
@@ -85,15 +96,16 @@ angular.module('tmt.controllers', [])
       });
     };
 
-    $scope.toggleFavourite = function(index) {
-      var station = $scope.stations.results[index];
+    $scope.toggleFavourite = function(collection, index) {
+      var station = collection[index];
       station.isFavourite = !station.isFavourite;
       if(station.isFavourite) {
         $scope.favourites = FavouriteStations.add(station);
       } else {
         $scope.favourites = FavouriteStations.remove(station);
       }
-      $scope.stations.results[index] = station;
+      collection[index] = station;
+      return collection;
     }
 
     $scope.removeFavourite = function(station) {
