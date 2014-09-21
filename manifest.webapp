@@ -1,17 +1,16 @@
 {
   "name": "TakeMeTo",
   "description": "Swiss public transport app",
-  "launch_path": "/index.html",
+  "launch_path": "/takemeto/index.html",
   "icons": {
-    "60": "img/icon.png"
+    "60": "takemeto/img/icon.png"
   },
   "developer": {
-    "name": "Your name or organization",
-    "url": "http://your-homepage-here.org"
+    "name": "Geekonaut (Martin Naumann)",
+    "url": "http://www.geekonaut.de"
   },
   "default_locale": "en",
   "permissions": {
-    "geolocation": { "description": "Show nearby stations and quick navigation from where you are"},
-    "systemXHR": { "description": "Retrieving connections and station list" }
+    "geolocation": { "description": "Show nearby stations and quick navigation from where you are"}
   }
 }
