@@ -2,15 +2,24 @@ angular.module('tmt.services', [])
 .factory('FavouriteStations', function() {
   var favourites = [];
 
+  try {
+    favourites = JSON.parse(localStorage.getItem('favouriteStations')) || [];
+  } catch(e) {
+    // No problem, really
+  }
+
   return {
     all: function() { return favourites; },
-    add: function(station) { favourites.push(station); return favourites; },
+    add: function(station) {
+      favourites.push(station);
+      localStorage.setItem('favouriteStations', JSON.stringify(favourites));
+      return favourites;
+    },
     remove: function(station) {
-      console.log("Removing ", station);
       for(var i=0, len = favourites.length; i<len; i++) {
         if(station.name == favourites[i].name) {
           favourites.splice(i, 1);
-          console.log("Removed", i, favourites);
+          localStorage.setItem('favouriteStations', JSON.stringify(favourites));
           return favourites;
         }
       }
@@ -88,21 +97,30 @@ angular.module('tmt.services', [])
 .factory('FavouriteRoutes', function() {
   var favourites = [];
 
+  try {
+    favourites = JSON.parse(localStorage.getItem('favouriteRoutes')) || [];
+  } catch(e) {
+    // No problem, really
+  }
+
   return {
     all: function() { return favourites; },
     getByStartStation: function(station) {
       return favourites.filter(function(fav) { return fav.from == station });
     },
-    add: function(connection) { favourites.push(connection); return favourites; },
+    add: function(connection) {
+      favourites.push(connection);
+      localStorage.setItem('favouriteRoutes', JSON.stringify(favourites));
+      return favourites;
+    },
     remove: function(connection) {
-      console.log("Removing ", connection);
       for(var i=0, len = favourites.length; i<len; i++) {
         if(connection.from == favourites[i].from && connection.to == favourites[i].to) {
           favourites.splice(i, 1);
-          console.log("Removed", i, favourites);
+          localStorage.setItem('favouriteRoutes', JSON.stringify(favourites));
           return favourites;
         }
       }
-    }    
+    }
   };
 });
