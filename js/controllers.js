@@ -1,9 +1,9 @@
 angular.module('tmt.controllers', [])
 
-.controller('QuickCtrl', function($scope, $http, Connections, Stations, FavouriteRoutes) {
-    $scope.nearby       = [];
-    $scope.destinations = [];
-    $scope.connections  = [];
+.controller('QuickCtrl', function($scope, $http, Connections, Stations, FavouriteStations, FavouriteRoutes) {
+    $scope.departureStations = [];
+    $scope.destinations      = [];
+    $scope.connections       = [];
 
     $scope.from  = null;
     $scope.route = {};
@@ -12,9 +12,11 @@ angular.module('tmt.controllers', [])
         console.log("Acquired position: ", position);
         Stations.nearby(position.coords, function(error, stations) {
           $scope.$apply(function() {
-            if(stations) stations = stations.slice(0);
-            $scope.nearby = stations;
-            $scope.from = $scope.nearby[0];
+            if(!stations) stations = FavouriteStations.all();
+            else stations = stations.concat(FavouriteStations.all());
+
+            $scope.departureStations = stations;
+            $scope.from = $scope.departureStations[0];
             $scope.getDestinations();
           });
         });
@@ -42,7 +44,7 @@ angular.module('tmt.controllers', [])
 .controller('ScheduleCtrl', function($scope) {
 })
 
-.controller('StationsCtrl', function($scope, Stations, FavouriteStations) {
+.controller('StationsCtrl', function($scope, $http, Stations, FavouriteStations) {
     navigator.geolocation.getCurrentPosition(function(position) {
         console.log("Acquired position: ", position);
         Stations.nearby(position.coords, function(error, stations) {
@@ -52,5 +54,38 @@ angular.module('tmt.controllers', [])
         });
     });
     $scope.nearby = [];
-    $scope.favourites = [];
+    $scope.favourites = FavouriteStations.all();
+    $scope.stations = {};
+
+    $scope.search = function() {
+      $http({method: "GET", url: "http://transport.opendata.ch/v1/locations?type=station&limit=10&query=" + $scope.stations.searchTerm})
+      .success(function(response) {
+        var stations = response.stations, favs = $scope.favourites;
+        for(var i=0, len = stations.length; i<len; i++) {
+          stations[i].isFavourite = false;
+          for(var f=0, flen = favs.length; f<flen;f++) {
+            if(stations[i].name == favs[f].name) {
+              stations[i].isFavourite = true;
+              break;
+            }
+          }
+        }
+        $scope.stations.results = stations;
+      });
+    };
+
+    $scope.toggleFavourite = function(index) {
+      var station = $scope.stations.results[index];
+      station.isFavourite = !station.isFavourite;
+      if(station.isFavourite) {
+        $scope.favourites = FavouriteStations.add(station);
+      } else {
+        $scope.favourites = FavouriteStations.remove(station);
+      }
+      $scope.stations.results[index] = station;
+    }
+
+    $scope.removeFavourite = function(station) {
+      $scope.favourites = FavouriteStations.remove(station);
+    }
 });
