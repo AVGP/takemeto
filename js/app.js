@@ -60,6 +60,16 @@ angular.module('tmt', ['ionic', 'tmt.controllers', 'tmt.services'])
           controller: 'StationsCtrl'
         }
       }
+    })
+
+    .state('tab.station-detail', {
+      url: '/stations/:stationid',
+      views: {
+        'tab-stations': {
+          templateUrl: 'templates/tab-station-detail.html',
+          controller: 'StationDetailCtrl'
+        }
+      }
     });
 
   // if none of the above states are matched, use this as the fallback
