@@ -10,6 +10,7 @@ angular.module('tmt.services', [])
 
   return {
     all: function() { return favourites; },
+    find: function(term) { return favourites.filter(function(station) { return station.name.search(term) !== -1; }); },
     add: function(station) {
       favourites.push(station);
       localStorage.setItem('favouriteStations', JSON.stringify(favourites));
