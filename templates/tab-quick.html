@@ -3,7 +3,7 @@
     <div class="list">
       <div class="item item-input item-select">
         <label class="input-label">Starting from</label>
-        <select ng-model="from" ng-options="station.name for station in nearby" ng-change="getDestinations()"></select>
+        <select ng-model="from" ng-options="station.name for station in departureStations" ng-change="getDestinations()"></select>
       </div>
       <div class="item item-input" ng-class="destinations.length > 0 ? 'item-select' : ''">
         <label class="input-label">Going to</label>
