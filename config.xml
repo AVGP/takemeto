@@ -8,4 +8,8 @@
     <name>TakeMeTo</name>
     <description>Swiss public transport app with a twist</description>
     <author href="http://www.geekonaut.de" email="">Martin Naumann</author>
+    <icon src="img/icon.png">
+    
+    <feature name="http://api.phonegap.com/1.0/geolocation"/>
+    <feature name="http://api.phonegap.com/1.0/network"/>
 </widget>
