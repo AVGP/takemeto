@@ -49,13 +49,13 @@ angular.module('tmt.controllers', [])
     }
 })
 
-.controller('NavigationCtrl', function($scope, $http, Connections) {
+.controller('NavigationCtrl', function($scope, $http, Connections, FavouriteStations) {
   $scope.route = {};
 
   $scope.search = function(resultProperty, term) {
     $http({method: "GET", url: "http://transport.opendata.ch/v1/locations?type=station&query=" + term})
     .success(function(response) {
-      $scope[resultProperty] = response.stations;
+      $scope[resultProperty] = FavouriteStations.find(term).concat(response.stations);
     });
   };
 
