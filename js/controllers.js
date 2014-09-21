@@ -49,7 +49,7 @@ angular.module('tmt.controllers', [])
     }
 })
 
-.controller('NavigationCtrl', function($scope, $http, Connections, FavouriteStations) {
+.controller('NavigationCtrl', function($scope, $http, Connections, FavouriteStations, FavouriteRoutes) {
   $scope.route = {};
 
   $scope.search = function(resultProperty, term) {
