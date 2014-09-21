@@ -15,7 +15,8 @@
     <button class="button button-positive button-block" ng-click="getConnections()">Take me there</button>
 
     <ul class="list">
-      <li class="item" ng-repeat="conn in connections">
+      <li class="item item-icon-left" ng-repeat="conn in connections">
+        <i class="icon ion-star" ng-class="conn.isFavourite ? 'favourite' : 'inactive'" ng-click="toggleFavourite($index)"></i>
         {{conn.from}} &mdash; {{conn.to}}
         <i class="item-note">{{conn.departure}} &mdash; {{conn.arrival}} ({{conn.duration}})</i>
       </li>
