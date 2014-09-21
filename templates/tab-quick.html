@@ -12,7 +12,7 @@
         <select ng-model="route.to" ng-show="destinations.length > 0" ng-options="route.to as route.to for route in destinations"></select>
       </div>
     </div>      
-    <button class="button button-positive button-block" ng-click="getConnections()">Take me there</button>
+    <button class="button button-assertive button-block" ng-click="getConnections()">Take me there</button>
 
     <ul class="list">
       <li class="item item-icon-left" ng-repeat="conn in connections">

@@ -6,6 +6,18 @@
   color: darkgoldenrod;
 }
 
+.tab-item {
+  color: red;
+}
+
+.tabs-striped .tab-item.tab-item-active, .tabs-striped .tab-item.activated {
+  border-color: red;
+}
+
 a, a:visited {
   color: black;
+}
+
+h1 {
+  font-weight: bold;
 }
