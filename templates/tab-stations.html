@@ -8,27 +8,27 @@
   </ion-header-bar>
 
   <ion-content class="padding" scroll="true">
-    <ul class="list" ng-show="stations.results.length > 0">
-      <li class="item item-icon-left" ng-repeat="station in stations.results">
+    <div class="list" ng-show="stations.results.length > 0">
+      <a class="item item-icon-left" ng-repeat="station in stations.results" href="#/tab/stations/{{station.id}}">
         <i class="icon ion-star" ng-class="station.isFavourite ? 'favourite' : 'inactive'" ng-click="station.results = toggleFavourite(stations.results, $index)"></i>
         {{station.name}}
-      </li>
-    </ul>
+      </a>
+    </div>
 
     <h2>Nearby</h2>
-    <ul class="list">
-      <li class="item" ng-repeat="station in nearby">
+    <div class="list">
+      <a class="item" ng-repeat="station in nearby" href="#/tab/stations/{{station.id}}">
         <i class="icon ion-star" ng-class="station.isFavourite ? 'favourite' : 'inactive'" ng-click="nearby = toggleFavourite(nearby, $index)"></i>
         {{station.name}} <span class="badge badge-stable">{{station.distance}}m</span>
-      </li>
-    </ul>
+      </a>
+    </div>
 
     <h2>Favourites</h2>
-    <ul class="list">
-      <li class="item item-icon-right" ng-repeat="fav in favourites">
+    <div class="list">
+      <a class="item item-icon-right" ng-repeat="fav in favourites" href="#/tab/stations/{{fav.id}}">
         {{fav.name}}
         <i ng-click="removeFavourite(fav)" class="icon ion-close-circled"></i>
-      </li>
-    </ul>
+      </a>
+    </div>
   </ion-content>
 </ion-view>

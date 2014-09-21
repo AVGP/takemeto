@@ -5,3 +5,7 @@
 .favourite {
   color: darkgoldenrod;
 }
+
+a, a:visited {
+  color: black;
+}

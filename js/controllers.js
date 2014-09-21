@@ -143,4 +143,19 @@ angular.module('tmt.controllers', [])
     $scope.removeFavourite = function(station) {
       $scope.favourites = FavouriteStations.remove(station);
     }
+})
+
+.controller('StationDetailCtrl', function($scope, $stateParams, $http) {
+  $scope.connections = [];
+  $scope.name = "";
+  
+  $http({method: "GET", url: "http://transport.opendata.ch/v1/stationboard?station=" + $stateParams.station})
+  .success(function(result) {
+    $scope.name = result.station.name;
+    var connections = result.stationboard;
+    for(var i=0;i<connections.length;i++) {
+      connections[i].departure = new Date(connections[i].stop.departure).toLocaleTimeString();
+    }
+    $scope.connections = connections;
+  });
 });

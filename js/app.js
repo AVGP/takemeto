@@ -63,7 +63,7 @@ angular.module('tmt', ['ionic', 'tmt.controllers', 'tmt.services'])
     })
 
     .state('tab.station-detail', {
-      url: '/stations/:stationid',
+      url: '/stations/:station',
       views: {
         'tab-stations': {
           templateUrl: 'templates/tab-station-detail.html',
