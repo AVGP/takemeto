@@ -3,7 +3,7 @@
   "description": "Swiss public transport app",
   "launch_path": "/takemeto/index.html",
   "icons": {
-    "60": "takemeto/img/icon.png"
+    "60": "img/icon.png"
   },
   "developer": {
     "name": "Geekonaut (Martin Naumann)",
