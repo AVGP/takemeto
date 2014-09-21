@@ -36,6 +36,17 @@ angular.module('tmt.controllers', [])
           $scope.connections = Connections.format(result);
         });
     }
+
+    $scope.toggleFavourite = function(index) {
+      var conn = $scope.connections[index];
+      conn.isFavourite = !conn.isFavourite;
+      if(conn.isFavourite) {
+        FavouriteRoutes.add(conn);
+      } else {
+        FavouriteRoutes.remove(conn);
+      }
+      $scope.connections[index] = conn;
+    }
 })
 
 .controller('NavigationCtrl', function($scope) {
