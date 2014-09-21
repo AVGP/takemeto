@@ -5,7 +5,6 @@ angular.module('tmt.controllers', [])
     $scope.destinations      = [];
     $scope.connections       = [];
 
-    $scope.from  = null;
     $scope.route = {};
 
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -16,22 +15,21 @@ angular.module('tmt.controllers', [])
             else stations = stations.concat(FavouriteStations.all());
 
             $scope.departureStations = stations;
-            $scope.from = $scope.departureStations[0];
+            $scope.route.from = $scope.departureStations[0];
             $scope.getDestinations();
           });
         });
     });
 
     $scope.getDestinations = function() {
-      $scope.from = this.from;
-      console.log("Getting destinations for ", $scope.from);
-      $scope.destinations = FavouriteRoutes.getByStartStation($scope.from.name);
-      $scope.route = $scope.destinations[0] || {};
+      console.log("Getting destinations for ", $scope.route.from);
+      $scope.destinations = FavouriteRoutes.getByStartStation($scope.route.from.name);
+      $scope.route.to = $scope.destinations[0].to || "";
       console.log("Destinations", $scope.destinations);
     }
 
     $scope.getConnections = function() {
-      $http({method: "GET", url: "http://transport.opendata.ch/v1/connections?limit=5&from=" + $scope.from.name + "&to=" + $scope.route.to})
+      $http({method: "GET", url: "http://transport.opendata.ch/v1/connections?limit=5&from=" + $scope.route.from.name + "&to=" + $scope.route.to})
         .success(function(result) {
           $scope.connections = Connections.format(result);
         });
