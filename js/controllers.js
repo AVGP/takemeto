@@ -59,6 +59,9 @@ angular.module('tmt.controllers', [])
     navigator.geolocation.getCurrentPosition(function(position) {
         console.log("Acquired position: ", position);
         Stations.nearby(position.coords, function(error, stations) {
+          if(!stations) return;
+          
+          stations = stations.slice(0, 5);
           var favs = $scope.favourites;
           for(var i=0, len = stations.length; i<len; i++) {
             stations[i].isFavourite = false;
