@@ -49,7 +49,27 @@ angular.module('tmt.controllers', [])
     }
 })
 
-.controller('NavigationCtrl', function($scope) {
+.controller('NavigationCtrl', function($scope, $http, Connections) {
+  $scope.route = {};
+
+  $scope.search = function(resultProperty, term) {
+    $http({method: "GET", url: "http://transport.opendata.ch/v1/locations?type=station&query=" + term})
+    .success(function(response) {
+      $scope[resultProperty] = response.stations;
+    });
+  };
+
+  $scope.choose = function(field, propertyName, value) {
+    $scope.route[field] = value;
+    $scope[propertyName] = [];
+  }
+
+  $scope.getConnections = function() {
+    $http({method: "GET", url: "http://transport.opendata.ch/v1/connections?limit=5&from=" + $scope.route.from + "&to=" + $scope.route.to})
+      .success(function(result) {
+        $scope.connections = Connections.format(result);
+      });
+  }
 })
 
 .controller('ScheduleCtrl', function($scope) {
