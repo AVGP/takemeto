@@ -1,12 +1,20 @@
 angular.module('tmt.services', [])
 .factory('FavouriteStations', function() {
-  var favourites = [
-   { name: "Zürich Hauptbahnhof", lat: 8.540192, lng: 47.378177 },
-   { name: "Zürich Hardbrücke", lat: 8.517108, lng: 47.385197 }
-  ];
+  var favourites = [];
 
   return {
-    all: function() { return favourites; }
+    all: function() { return favourites; },
+    add: function(station) { favourites.push(station); return favourites; },
+    remove: function(station) {
+      console.log("Removing ", station);
+      for(var i=0, len = favourites.length; i<len; i++) {
+        if(station.name == favourites[i].name) {
+          favourites.splice(i, 1);
+          console.log("Removed", i, favourites);
+          return favourites;
+        }
+      }
+    }
   };
 })
 .factory('Connections', function($http) {
