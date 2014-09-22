@@ -2,8 +2,8 @@
 <widget xmlns   = "http://www.w3.org/ns/widgets"
     xmlns:gap   = "http://phonegap.com/ns/1.0"
     id          = "de.geekonaut.takemeto"
-    versionCode = "1.0a" 
-    version     = "0.1.0">
+    versionCode = "2" 
+    version     = "0.2">
 
     <name>TakeMeTo</name>
     <description>Swiss public transport app with a twist</description>
