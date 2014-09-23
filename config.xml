@@ -7,7 +7,7 @@
 
     <name>TakeMeTo</name>
     <description>Swiss public transport app with a twist</description>
-    <author href="http://www.geekonaut.de" email="">Martin Naumann</author>
+    <author href="http://www.geekonaut.de" email="support@geekonaut.de">Martin Naumann</author>
 
     <icon src="img/icon.png" />
     <icon src="img/icon36.png" gap:platform="android" gap:density="ldpi" />
