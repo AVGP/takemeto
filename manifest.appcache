@@ -1,0 +1,44 @@
+CACHE MANIFEST
+
+#version 1.0 9-23-2014
+
+CACHE:
+
+#images
+http://avgp.github.io/takemeto/img/icon.png
+http://avgp.github.io/takemeto/img/icon36.png
+http://avgp.github.io/takemeto/img/icon48.png
+http://avgp.github.io/takemeto/img/icon60.png
+http://avgp.github.io/takemeto/img/icon72.png
+http://avgp.github.io/takemeto/img/icon96.png
+http://avgp.github.io/takemeto/img/icon256.png
+http://avgp.github.io/takemeto/img/icon512.png
+
+#internal HTML documents
+http://avgp.github.io/takemeto/index.html
+http://avgp.github.io/takemeto/templates/tab-connection-detail.html
+http://avgp.github.io/takemeto/templates/tab-navigate.html
+http://avgp.github.io/takemeto/templates/tab-quick.html
+http://avgp.github.io/takemeto/templates/tab-station-detail.html
+http://avgp.github.io/takemeto/templates/tab-stations.html
+http://avgp.github.io/takemeto/templates/tabs.html
+
+#style sheets
+http://avgp.github.io/takemeto/css/style.css
+http://avgp.github.io/takemeto/lib/ionic/css/ionic.min.css
+
+#fonts
+http://avgp.github.io/takemeto/lib/ionic/fonts/ionicons.eot
+http://avgp.github.io/takemeto/lib/ionic/fonts/ionicons.svg
+http://avgp.github.io/takemeto/lib/ionic/fonts/ionicons.ttf
+http://avgp.github.io/takemeto/lib/ionic/fonts/ionicons.woff
+
+#javascript files
+http://avgp.github.io/takemeto/lib/ionic/js/ionic.bundle.min.js
+http://avgp.github.io/takemeto/cordova.js
+http://avgp.github.io/takemeto/js/app.js
+http://avgp.github.io/takemeto/js/controllers.js
+http://avgp.github.io/takemeto/js/services.js
+
+NETWORK:
+*
