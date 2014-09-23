@@ -144,6 +144,9 @@ angular.module('tmt.services', [])
     getByStartStation: function(station) {
       return favourites.filter(function(fav) { return fav.from == station });
     },
+    getByRoute: function(from, to) {
+      return favourites.filter(function(fav) { return fav.from == from && fav.to == to; });
+    },
     add: function(connection) {
       favourites.push(connection);
       localStorage.setItem('favouriteRoutes', JSON.stringify(favourites));

@@ -34,7 +34,10 @@ angular.module('tmt.controllers', [])
     $scope.getConnections = function() {
       $http({method: "GET", url: "http://transport.opendata.ch/v1/connections?limit=5&from=" + $scope.route.from.name + "&to=" + $scope.route.to})
         .success(function(result) {
-          $scope.connections = Connections.format(result);
+          $scope.connections = FavouriteRoutes.getByRoute($scope.route.from.name, $scope.route.to).concat(Connections.format(result));
+        })
+        .error(function() {
+          $scope.connections = FavouriteRoutes.getByRoute($scope.route.from.name, $scope.route.to);
         });
     }
 
