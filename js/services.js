@@ -91,7 +91,7 @@ angular.module('tmt.services', [])
             isFavourite = false;
 
         for(var f=0, flen = favConns.length; f<flen;f++) {
-          if(connections[i].from.station.name == favConns[f].from && connections[i].to.station.name == favConns[f].to) {
+          if(connections[i].from.station.name == favConns[f].from && connections[i].to.station.name == favConns[f].to && departureAt == favConns[f].departureAt) {
             isFavourite = true;
             break;
           }
