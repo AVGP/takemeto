@@ -1,6 +1,6 @@
 angular.module('tmt.controllers', [])
 
-.controller('QuickCtrl', function($scope, $http, Connections, Stations, FavouriteStations, FavouriteRoutes) {
+.controller('QuickCtrl', function($scope, $location, $http, Connections, Stations, FavouriteStations, FavouriteRoutes) {
     $scope.departureStations = [];
     $scope.destinations      = [];
     $scope.connections       = [];
@@ -45,9 +45,18 @@ angular.module('tmt.controllers', [])
       }
       $scope.connections[index] = conn;
     }
+    
+    $scope.show = function(index) {
+      Connections.set($scope.connections[index]);
+      $location.path("/tab/quick/detail");
+    }
 })
 
-.controller('NavigationCtrl', function($scope, $http, Connections, FavouriteStations, FavouriteRoutes) {
+.controller('ConnectionDetailCtrl', function($scope, $stateParams, Connections) {
+  $scope.connection = Connections.get();
+})
+
+.controller('NavigationCtrl', function($scope, $http, $location, Connections, FavouriteStations, FavouriteRoutes) {
   $scope.route = {};
 
   $scope.search = function(resultProperty, term) {
@@ -79,6 +88,11 @@ angular.module('tmt.controllers', [])
     }
     $scope.connections[index] = conn;
   }
+
+    $scope.show = function(index) {
+      Connections.set($scope.connections[index]);
+      $location.path("/tab/navigate/detail");
+    }
 })
 
 .controller('ScheduleCtrl', function($scope) {
