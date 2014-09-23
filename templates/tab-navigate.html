@@ -5,7 +5,7 @@
         <i class="icon ion-ios7-search placeholder-icon"></i>
         <input type="search" placeholder="From" ng-change="search('departureStations', route.from)" ng-model="route.from">
       </label>
-      <button class="button button-clear">Cancel</button>
+      <button class="button button-clear" ng-click="clear('from', 'departureStations')">Cancel</button>
     </div>
 
     <ul class="list" ng-show="departureStations.length > 0">
@@ -17,7 +17,7 @@
         <i class="icon ion-ios7-search placeholder-icon"></i>
         <input type="search" placeholder="To" ng-change="search('arrivalStations', route.to)" ng-model="route.to">
       </label>
-      <button class="button button-clear">Cancel</button>
+      <button class="button button-clear" ng-click="clear('to', 'arrivalStations')">Cancel</button>
     </div>
 
     <ul class="list" ng-show="arrivalStations.length > 0">
@@ -26,7 +26,7 @@
 
     <button class="button button-assertive button-block" ng-click="getConnections()">Find connections</button>
 
-    <ul class="list">
+    <ul class="list" ng-show="connections.length > 0">
       <li class="item item-icon-left" ng-repeat="conn in connections" ng-click="show($index)">
         <i class="icon ion-star" ng-class="conn.isFavourite ? 'favourite' : 'inactive'" ng-click="toggleFavourite($index); $event.stopPropagation()"></i>
         {{conn.from}} &mdash; {{conn.to}}

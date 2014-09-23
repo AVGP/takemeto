@@ -89,10 +89,16 @@ angular.module('tmt.controllers', [])
     $scope.connections[index] = conn;
   }
 
-    $scope.show = function(index) {
-      Connections.set($scope.connections[index]);
-      $location.path("/tab/navigate/detail");
-    }
+  $scope.clear = function(routeField, autocompleteField) {
+    $scope.route[routeField] = "";
+    $scope[autocompleteField] = [];
+    $scope.connections = [];
+  }
+
+  $scope.show = function(index) {
+    Connections.set($scope.connections[index]);
+    $location.path("/tab/navigate/detail");
+  }
 })
 
 .controller('ScheduleCtrl', function($scope) {
