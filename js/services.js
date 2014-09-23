@@ -46,7 +46,41 @@ angular.module('tmt.services', [])
     return formatted;
   };
 
+  function getJourney(sections) {
+    var journey = [];
+    for(var i=0, len = sections.length; i<len; i++) {
+      var section = {};
+      if(sections[i].walk) {
+        if(!sections[i].walk.duration) continue;
+        var timeParts = sections[i].walk.duration.split(":");
+        section.walk = "walk (";
+        if(timeParts[0] !== "00") section.walk += parseInt(timeParts[0], 10) + "h ";
+        section.walk += parseInt(timeParts[1]) + "m)";
+        journey.push(section);
+        continue;
+      }
+
+      section = {
+        name: sections[i].journey.name,
+        direction: sections[i].journey.to,
+        from: sections[i].departure.station.name,
+        to: sections[i].arrival.station.name,
+        departure: new Date(sections[i].departure.prognosis.departure || sections[i].departure.departure).toLocaleTimeString(),
+        arrival: new Date(sections[i].arrival.prognosis.arrival || sections[i].arrival.arrival).toLocaleTimeString(),
+        platform: sections[i].departure.prognosis.platform || sections[i].departure.platform
+      };
+      
+      journey.push(section);
+    }
+    
+    return journey;
+  }
+
+  var chosenConnection = {};
+
   return {
+    set: function(conn) { chosenConnection = conn; },
+    get: function() { return chosenConnection; },
     format: function(rawConnections) {
       var connections = rawConnections.connections;
       var favConns = FavouriteRoutes.all();
@@ -69,7 +103,8 @@ angular.module('tmt.services', [])
           departure: departureAt.toLocaleTimeString().slice(0, -3),
           arrival: arrivalAt.toLocaleTimeString().slice(0, -3),
           duration: duration,
-          isFavourite: isFavourite
+          isFavourite: isFavourite, 
+          journey: getJourney(connections[i].sections)
         };
       }
 
