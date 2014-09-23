@@ -1,7 +1,7 @@
 angular.module('tmt.controllers', [])
 
 .controller('QuickCtrl', function($scope, $location, $http, Connections, Stations, FavouriteStations, FavouriteRoutes) {
-    $scope.departureStations = [];
+    $scope.departureStations = FavouriteStations.all();
     $scope.destinations      = [];
     $scope.connections       = [];
 
@@ -15,6 +15,9 @@ angular.module('tmt.controllers', [])
             else stations = stations.concat(FavouriteStations.all());
 
             $scope.departureStations = stations;
+            if(stations.length == 0) {
+              $scope.departureStations = FavouriteStations.all();
+            }
             $scope.route.from = $scope.departureStations[0];
             $scope.getDestinations();
           });
