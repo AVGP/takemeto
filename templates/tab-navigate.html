@@ -27,8 +27,8 @@
     <button class="button button-assertive button-block" ng-click="getConnections()">Find connections</button>
 
     <ul class="list">
-      <li class="item item-icon-left" ng-repeat="conn in connections">
-        <i class="icon ion-star" ng-class="conn.isFavourite ? 'favourite' : 'inactive'" ng-click="toggleFavourite($index)"></i>
+      <li class="item item-icon-left" ng-repeat="conn in connections" ng-click="show($index)">
+        <i class="icon ion-star" ng-class="conn.isFavourite ? 'favourite' : 'inactive'" ng-click="toggleFavourite($index); $event.stopPropagation()"></i>
         {{conn.from}} &mdash; {{conn.to}}
         <i class="item-note">{{conn.departure}} &mdash; {{conn.arrival}} ({{conn.duration}})</i>
       </li>

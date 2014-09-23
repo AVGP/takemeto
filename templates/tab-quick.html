@@ -1,4 +1,9 @@
 <ion-view title="Quick Trip">
+  <ion-nav-bar>
+    <ion-nav-back-button class="button-clear">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
   <ion-content>
     <div class="list">
       <div class="item item-input item-select">
@@ -15,8 +20,8 @@
     <button class="button button-assertive button-block" ng-click="getConnections()">Take me there</button>
 
     <ul class="list">
-      <li class="item item-icon-left" ng-repeat="conn in connections">
-        <i class="icon ion-star" ng-class="conn.isFavourite ? 'favourite' : 'inactive'" ng-click="toggleFavourite($index)"></i>
+      <li class="item item-icon-left" ng-repeat="conn in connections" ng-click="show($index)">
+        <i class="icon ion-star" ng-class="conn.isFavourite ? 'favourite' : 'inactive'" ng-click="toggleFavourite($index); $event.stopPropagation()"></i>
         {{conn.from}} &mdash; {{conn.to}}
         <i class="item-note">{{conn.departure}} &mdash; {{conn.arrival}} ({{conn.duration}})</i>
       </li>

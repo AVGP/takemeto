@@ -1,0 +1,15 @@
+<ion-view title="{{connection.from}} - {{connection.to}}">
+  <ion-content>
+    <ul class="list">
+      <li class="item" ng-repeat="section in connection.journey">
+        {{section.walk}}
+        <span ng-hide="section.walk">
+          {{section.from}} (direction {{section.direction}}) &mdash; {{section.to}}
+          <span class="item-note">{{section.departure}} - {{section.arrival}}</span>
+        </span>
+      </li>
+    </ul>
+  
+    {{connection}}
+  </ion-content>
+</ion-view>
