@@ -32,6 +32,16 @@ angular.module('tmt', ['ionic', 'tmt.controllers', 'tmt.services'])
       }
     })
 
+    .state('tab.quick-detail', {
+      url: '/quick/detail',
+      views: {
+        'tab-quick': {
+          templateUrl: 'templates/tab-connection-detail.html',
+          controller: 'ConnectionDetailCtrl'
+        }
+      }
+    })
+
     .state('tab.navigate', {
       url: '/navigate',
       views: {
@@ -41,6 +51,17 @@ angular.module('tmt', ['ionic', 'tmt.controllers', 'tmt.services'])
         }
       }
     })
+
+    .state('tab.navigate-detail', {
+      url: '/navigate/detail',
+      views: {
+        'tab-navigate': {
+          templateUrl: 'templates/tab-connection-detail.html',
+          controller: 'ConnectionDetailCtrl'
+        }
+      }
+    })
+
 
     .state('tab.schedule', {
       url: '/schedule',
