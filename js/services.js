@@ -69,10 +69,10 @@ angular.module('tmt.services', [])
         arrival: new Date(sections[i].arrival.prognosis.arrival || sections[i].arrival.arrival).toLocaleTimeString(),
         platform: sections[i].departure.prognosis.platform || sections[i].departure.platform
       };
-      
+
       journey.push(section);
     }
-    
+
     return journey;
   }
 
@@ -103,7 +103,7 @@ angular.module('tmt.services', [])
           departure: departureAt.toLocaleTimeString().slice(0, -3),
           arrival: arrivalAt.toLocaleTimeString().slice(0, -3),
           duration: duration,
-          isFavourite: isFavourite, 
+          isFavourite: isFavourite,
           journey: getJourney(connections[i].sections)
         };
       }
@@ -120,7 +120,7 @@ angular.module('tmt.services', [])
 
   function getStationsByLocation(position, callback) {
     var req = new XMLHttpRequest();
-    req.open("GET", "http://transport.opendata.ch/v1/locations?type=station&x=" + position.latitude + "&y=" + position.longitude);
+    req.open("GET", "https://transport.opendata.ch/v1/locations?type=station&x=" + position.latitude + "&y=" + position.longitude);
     req.onload = function() { callback(false, JSON.parse(this.responseText).stations); };
     req.send();
   }

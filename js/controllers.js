@@ -25,14 +25,19 @@ angular.module('tmt.controllers', [])
     });
 
     $scope.getDestinations = function() {
+      if(!$scope.route.from) {
+        $scope.route.from = {
+          name: ''
+        };
+      }
       console.log("Getting destinations for ", $scope.route.from);
       $scope.destinations = FavouriteRoutes.getByStartStation($scope.route.from.name);
-      $scope.route.to = $scope.destinations[0].to || "";
+      $scope.route.to = $scope.destinations[0] && $scope.destinations[0].to || "";
       console.log("Destinations", $scope.destinations);
     }
 
     $scope.getConnections = function() {
-      $http({method: "GET", url: "http://transport.opendata.ch/v1/connections?limit=5&from=" + $scope.route.from.name + "&to=" + $scope.route.to})
+      $http({method: "GET", url: "https://transport.opendata.ch/v1/connections?limit=5&from=" + $scope.route.from.name + "&to=" + $scope.route.to})
         .success(function(result) {
           $scope.connections = FavouriteRoutes.getByRoute($scope.route.from.name, $scope.route.to).concat(Connections.format(result));
         })
@@ -51,7 +56,7 @@ angular.module('tmt.controllers', [])
       }
       $scope.connections[index] = conn;
     }
-    
+
     $scope.show = function(index) {
       Connections.set($scope.connections[index]);
       $location.path("/tab/quick/detail");
@@ -66,7 +71,7 @@ angular.module('tmt.controllers', [])
   $scope.route = {};
 
   $scope.search = function(resultProperty, term) {
-    $http({method: "GET", url: "http://transport.opendata.ch/v1/locations?type=station&query=" + term})
+    $http({method: "GET", url: "https://transport.opendata.ch/v1/locations?type=station&query=" + term})
     .success(function(response) {
       $scope[resultProperty] = FavouriteStations.find(term).concat(response.stations);
     });
@@ -78,7 +83,7 @@ angular.module('tmt.controllers', [])
   }
 
   $scope.getConnections = function() {
-    $http({method: "GET", url: "http://transport.opendata.ch/v1/connections?limit=5&from=" + $scope.route.from + "&to=" + $scope.route.to})
+    $http({method: "GET", url: "https://transport.opendata.ch/v1/connections?limit=5&from=" + $scope.route.from + "&to=" + $scope.route.to})
       .success(function(result) {
         $scope.connections = Connections.format(result);
       });
@@ -115,7 +120,7 @@ angular.module('tmt.controllers', [])
         console.log("Acquired position: ", position);
         Stations.nearby(position.coords, function(error, stations) {
           if(!stations) return;
-          
+
           stations = stations.slice(0, 5);
           var favs = $scope.favourites;
           for(var i=0, len = stations.length; i<len; i++) {
@@ -138,7 +143,7 @@ angular.module('tmt.controllers', [])
     $scope.stations = {};
 
     $scope.search = function() {
-      $http({method: "GET", url: "http://transport.opendata.ch/v1/locations?type=station&limit=10&query=" + $scope.stations.searchTerm})
+      $http({method: "GET", url: "https://transport.opendata.ch/v1/locations?type=station&limit=10&query=" + $scope.stations.searchTerm})
       .success(function(response) {
         var stations = response.stations, favs = $scope.favourites;
         for(var i=0, len = stations.length; i<len; i++) {
@@ -169,7 +174,7 @@ angular.module('tmt.controllers', [])
     $scope.removeFavourite = function(station) {
       $scope.favourites = FavouriteStations.remove(station);
     }
-    
+
     $scope.show = function(stationId) {
       $location.path("/tab/stations/" + stationId);
     }
@@ -178,8 +183,8 @@ angular.module('tmt.controllers', [])
 .controller('StationDetailCtrl', function($scope, $stateParams, $http) {
   $scope.connections = [];
   $scope.name = "";
-  
-  $http({method: "GET", url: "http://transport.opendata.ch/v1/stationboard?station=" + $stateParams.station})
+
+  $http({method: "GET", url: "https://transport.opendata.ch/v1/stationboard?station=" + $stateParams.station})
   .success(function(result) {
     $scope.name = result.station.name;
     var connections = result.stationboard;
